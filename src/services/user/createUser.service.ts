@@ -1,7 +1,8 @@
 import { AppDataSource } from "../../data-source";
 import User from "../../entities/User";
-import { CreateUser, ReturnUserCreation } from "../../interfaces/user";
+import { CreateUser } from "../../interfaces/user";
 import * as bcrypt from "bcryptjs";
+import CustomError from "../../errors/CustomError";
 
 const createUserService = async ({
   name,
@@ -10,6 +11,7 @@ const createUserService = async ({
   age,
 }: CreateUser): Promise<User> => {
   const userRepository = AppDataSource.manager.getRepository(User);
+
   const user = await userRepository.findOne({
     where: {
       email,
@@ -17,7 +19,7 @@ const createUserService = async ({
   });
 
   if (user) {
-    throw new Error("Email altready in use.");
+    throw new CustomError("Email already in use", 400);
   }
 
   const hashedPassword = await bcrypt.hash(password, 8);

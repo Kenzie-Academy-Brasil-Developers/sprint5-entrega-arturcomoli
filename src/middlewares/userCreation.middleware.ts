@@ -27,7 +27,8 @@ export const validateUserCreation =
         next();
       } catch (err: any) {
         return res.status(400).json({
-          error: err.errors?.join(", "),
+          status: "error",
+          message: err.errors?.join(", "),
         });
       }
     } catch (err) {
