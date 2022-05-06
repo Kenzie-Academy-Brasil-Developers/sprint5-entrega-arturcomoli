@@ -4,3 +4,7 @@ export interface CreateUser {
   password: string;
   age: number;
 }
+
+export interface FindUser {
+  id: string;
+}
