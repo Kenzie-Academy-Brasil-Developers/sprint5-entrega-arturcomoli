@@ -1,10 +1,11 @@
 import * as express from "express";
-import { CreateUser } from "../../src/interfaces/user";
+import { CreateUser, UpdateUser } from "../../src/interfaces/user";
 
 declare global {
   namespace Express {
     interface Request {
       validUser: CreateUser;
+      updateUser: UpdateUser;
     }
   }
 }

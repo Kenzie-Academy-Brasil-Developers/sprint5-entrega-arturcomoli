@@ -33,7 +33,6 @@ const createUserService = async ({
 
   await userRepository.save(newUser);
 
-  // const user =
   return newUser;
 };
 
